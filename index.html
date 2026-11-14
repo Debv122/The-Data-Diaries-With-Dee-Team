@@ -121,6 +121,41 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: #60a5fa; }
+  .nav-more { position: relative; }
+  .nav-more-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.95);
+    transition: color 0.2s;
+  }
+  .nav-more-btn:hover, .nav-more.open .nav-more-btn { color: #60a5fa; }
+  .nav-more-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 14px;
+    min-width: 170px;
+    list-style: none;
+    padding: 8px 0;
+    background: var(--navy);
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  }
+  /* invisible bridge so the menu stays open while moving the mouse down */
+  .nav-more-menu::before { content: ''; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
+  .nav-more:hover .nav-more-menu,
+  .nav-more:focus-within .nav-more-menu,
+  .nav-more.open .nav-more-menu { display: block; }
+  .nav-more-menu a { display: block; padding: 10px 18px; }
   .nav-cta {
     background: var(--accent) !important;
     color: var(--white) !important;
@@ -1570,12 +1605,17 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#workshops">Training</a></li>
     <li><a href="#mentorship">Mentorship</a></li>
-    <li><a href="#speaking">Speaking</a></li>
-    <li><a href="#gallery">Gallery</a></li>
     <li><a href="#courses">Courses</a></li>
-    <li><a href="#outcomes">Outcomes</a></li>
-    <li><a href="faq.html">FAQ</a></li>
     <li><a href="#contact">Contact</a></li>
+    <li class="nav-more">
+      <button type="button" class="nav-more-btn" aria-haspopup="true" aria-expanded="false">More <span aria-hidden="true">&#9662;</span></button>
+      <ul class="nav-more-menu">
+        <li><a href="#speaking">Speaking</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#outcomes">Outcomes</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+      </ul>
+    </li>
     <li><a href="#contact" class="nav-cta">Book a Call</a></li>
   </ul>
   <button class="hamburger" id="hamburger" aria-label="Open menu">
@@ -2602,6 +2642,9 @@
       <div class="footer-links">
         <a href="#about">About Dee</a>
         <a href="#outcomes">Results</a>
+        <a href="#speaking">Speaking</a>
+        <a href="#gallery">Gallery</a>
+        <a href="faq.html">FAQ</a>
         <a href="https://youtube.com/@thedatadiarieswithdee?si=Osoo4VTuQ0_00QPD" target="_blank" rel="noopener">YouTube Channel</a>
         <a href="https://www.linkedin.com/in/debbie-adeolu-boluwatife/" target="_blank" rel="noopener">LinkedIn</a>
       </div>
@@ -2629,6 +2672,27 @@
 </footer>
 
 <script>
+  // "More" dropdown in the top nav (click/tap + keyboard support; hover handled in CSS)
+  const navMore = document.querySelector('.nav-more');
+  if (navMore) {
+    const moreBtn = navMore.querySelector('.nav-more-btn');
+    moreBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = navMore.classList.toggle('open');
+      moreBtn.setAttribute('aria-expanded', isOpen);
+    });
+    document.addEventListener('click', () => {
+      navMore.classList.remove('open');
+      moreBtn.setAttribute('aria-expanded', 'false');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        navMore.classList.remove('open');
+        moreBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   // Hamburger menu
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobile-menu');
