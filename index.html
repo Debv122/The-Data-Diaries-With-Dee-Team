@@ -1728,6 +1728,136 @@
     padding:9px 6px; font-family:'DM Mono',monospace; font-size:9.5px; letter-spacing:.06em;
     text-transform:uppercase; color:rgba(255,255,255,0.62); white-space:nowrap; }
   .bar:nth-child(1){animation-delay:.07s} .bar:nth-child(2){animation-delay:.14s} .bar:nth-child(3){animation-delay:.21s} .bar:nth-child(4){animation-delay:.28s} .bar:nth-child(5){animation-delay:.35s} .bar:nth-child(6){animation-delay:.42s} .bar:nth-child(7){animation-delay:.49s} .bar:nth-child(8){animation-delay:.56s} .bar:nth-child(9){animation-delay:.63s} .bar:nth-child(10){animation-delay:.70s} .bar:nth-child(11){animation-delay:.77s} .bar:nth-child(12){animation-delay:.84s}
+
+  /* ─── HERO · brand scene (logo blue #1b23e6 + white) ───────────── */
+  .hero { --brand:#1b23e6; --brand-deep:#060a3d; --brand-ink:#0b1066; --brand-tint:#8f95ff; --brand-soft:#c9ccff;
+    background: var(--brand-deep); }
+  .hero-bg { background:
+      radial-gradient(ellipse at 12% 18%, rgba(27,35,230,0.55) 0%, transparent 45%),
+      radial-gradient(ellipse at 85% 85%, rgba(27,35,230,0.45) 0%, transparent 50%),
+      radial-gradient(ellipse at 55% 40%, rgba(143,149,255,0.10) 0%, transparent 55%); }
+  .hero .badge { background: rgba(27,35,230,0.25); border-color: rgba(143,149,255,0.4); color: var(--brand-soft); }
+  .hero .badge::before { background: #fff; box-shadow: 0 0 10px #fff; }
+  .hero h1 em { color: var(--brand-tint); font-weight: 400; }
+  .hero .btn-primary { background: #fff; color: var(--brand); box-shadow: 0 10px 30px rgba(27,35,230,0.45); }
+  .hero .btn-primary:hover { background: var(--brand-soft); }
+  .hero .stat-num { color: #fff; }
+  .hero-left > * { animation: heroUp .8s cubic-bezier(.2,.7,.2,1) both; }
+  .hero-left > *:nth-child(2) { animation-delay: .08s } .hero-left > *:nth-child(3) { animation-delay: .16s }
+  .hero-left > *:nth-child(4) { animation-delay: .24s } .hero-left > *:nth-child(5) { animation-delay: .32s }
+  @keyframes heroUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+  /* Scene: one 680x520 design box; children placed in % of it, sized in cqw */
+  .dwd-scene { position: relative; width: 100%; max-width: 680px; aspect-ratio: 680 / 520; container-type: inline-size; }
+  .dwd-title { position: absolute; left: 50%; top: 4%; margin-left: -15cqw; width: 30cqw; text-align: center; z-index: 3;
+    font-family: 'DM Mono', monospace; font-size: 1.5cqw; letter-spacing: .16em; text-transform: uppercase; color: var(--brand-soft);
+    padding: .9cqw 0; border: 1px solid rgba(143,149,255,.35); border-radius: 4cqw; background: rgba(27,35,230,.18); }
+  .dwd-lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .dwd-lines path { fill: none; stroke: var(--brand-tint); stroke-width: 1.6; stroke-dasharray: 5 6; opacity: .75;
+    animation: dwdFlow 1.6s linear infinite; }
+  .dwd-lines circle { fill: #fff; filter: drop-shadow(0 0 4px #8f95ff); animation: dwdPing 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  @keyframes dwdFlow { to { stroke-dashoffset: -22; } }
+  @keyframes dwdPing { 0%,100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.6); opacity: .55; } }
+
+  /* Skill nodes: each one "unlocks" in turn (JS adds .lit) */
+  .dwd-node { position: absolute; margin: -3.3cqw 0 0 -9.5cqw; display: grid; justify-items: center; text-align: center;
+    width: 19cqw; gap: .5cqw; z-index: 3; animation: heroUp .7s cubic-bezier(.2,.7,.2,1) both; }
+  .dwd-node .ic { position: relative; width: 6.6cqw; height: 6.6cqw; border-radius: 1.8cqw; display: grid; place-items: center;
+    background: linear-gradient(145deg, var(--brand), var(--brand-ink)); border: 1px solid rgba(143,149,255,.45);
+    box-shadow: 0 1.5cqw 3cqw rgba(0,0,0,.35), 0 0 2.5cqw rgba(27,35,230,.55); animation: dwdBob 5s ease-in-out infinite;
+    transition: background .4s, box-shadow .4s; }
+  .dwd-node .ic svg { width: 3.4cqw; height: 3.4cqw; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke .4s; }
+  .dwd-node .ic::after { content: "\2713"; position: absolute; right: -1cqw; top: -1cqw; width: 2.5cqw; height: 2.5cqw; border-radius: 50%;
+    background: #fff; color: var(--brand); font-size: 1.5cqw; font-weight: 700; display: grid; place-items: center;
+    box-shadow: 0 0 1.5cqw rgba(255,255,255,.7); transform: scale(0); transition: transform .35s cubic-bezier(.3,1.6,.5,1); }
+  .dwd-node.lit .ic { background: #fff; box-shadow: 0 0 0 .6cqw rgba(143,149,255,.25), 0 0 4cqw rgba(143,149,255,.8); }
+  .dwd-node.lit .ic svg { stroke: var(--brand); }
+  .dwd-node.lit .ic::after { transform: scale(1); background: var(--brand); color: #fff; }
+  .dwd-node b { font-family: 'DM Sans', sans-serif; font-size: 2.3cqw; font-weight: 600; color: #fff; line-height: 1.2; }
+  .dwd-node small { font-size: 1.75cqw; color: rgba(201,204,255,.7); line-height: 1.4; }
+  @keyframes dwdBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-.9cqw); } }
+
+  /* Laptop: impact dashboard */
+  .dwd-laptop { position: absolute; left: 25%; top: 31.7%; width: 50%; z-index: 2; animation: heroUp .9s .15s cubic-bezier(.2,.7,.2,1) both; }
+  .dwd-screen { aspect-ratio: 340 / 200; background: #0a0e3a; border: .9cqw solid #1d2150; border-radius: 1.6cqw 1.6cqw 0 0;
+    display: grid; grid-template-columns: 9% 1fr; overflow: hidden; box-shadow: 0 3cqw 6cqw rgba(0,0,0,.5); }
+  .dwd-base { height: 2.2cqw; margin: 0 -6%; background: linear-gradient(#d9dcf2, #9da2c9); border-radius: 0 0 2cqw 2cqw; position: relative; }
+  .dwd-base::after { content: ""; position: absolute; left: 42%; right: 42%; top: 0; height: .8cqw; background: #8a8fb8; border-radius: 0 0 1cqw 1cqw; }
+  /* Laptop screen: gallery of our work */
+  .dwd-screen.gal { display: block; position: relative; background: #000; }
+  .dwd-slide { position: absolute; inset: 0; margin: 0; opacity: 0; z-index: 0; }
+  .dwd-slide.prev { opacity: 1; }
+  .dwd-slide.on { opacity: 1; z-index: 1; transition: opacity .45s ease; }
+  .dwd-slide { overflow: hidden; background: #060a3d; }
+  .dwd-slide img.bg { position: absolute; left: -10%; top: -10%; width: 120%; height: 120%; max-width: none; object-fit: cover; filter: blur(1.6cqw) brightness(.5); }
+  .dwd-slide img.fg { position: relative; width: 78%; height: 100%; object-fit: contain; display: block; }
+  .dwd-slide.zoom img.fg { object-fit: cover; object-position: 50% 16%; }
+  .dwd-slide.on img.fg { animation: dwdKen 4s ease-out both; }
+  @keyframes dwdKen { from { transform: scale(.96); } to { transform: scale(1); } }
+  .dwd-slide figcaption { position: absolute; left: 1.4cqw; bottom: 1.6cqw; max-width: 13cqw; padding: .7cqw 1cqw; border-radius: .8cqw;
+    background: rgba(6,10,61,.82); color: #fff; font-size: 1.25cqw; font-weight: 600; line-height: 1.25; }
+  .dwd-slide figcaption small { display: block; font-family: 'DM Mono', monospace; font-size: .85cqw; font-weight: 400; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--brand-soft); margin-bottom: .3cqw; }
+  .dwd-slide.on figcaption { animation: heroUp .7s .2s cubic-bezier(.2,.7,.2,1) both; }
+  .dwd-gal-top { position: absolute; left: 0; right: 0; top: 0; z-index: 2; padding: .9cqw 1.4cqw 0; }
+  .dwd-progress { display: flex; gap: .5cqw; }
+  .dwd-progress i { flex: 1; height: .35cqw; border-radius: 1cqw; background: rgba(255,255,255,.3); overflow: hidden; position: relative; }
+  .dwd-progress i::after { content: ""; position: absolute; inset: 0; background: #fff; transform-origin: left; transform: scaleX(0); }
+  .dwd-progress i.done::after { transform: scaleX(1); }
+  .dwd-progress i.now::after { animation: dwdFill 3.6s linear forwards; }
+  @keyframes dwdFill { to { transform: scaleX(1); } }
+  .dwd-gal-head { display: none; }
+  .dwd-gal-head img { width: 2.8cqw; height: 2.8cqw; border-radius: 50%; border: 1px solid #fff; }
+  .dwd-gal-head b { font-size: 1.35cqw; line-height: 1.1; display: block; }
+  .dwd-gal-head small { font-size: .95cqw; opacity: .8; }
+  .dwd-gal-head em { margin-left: auto; font-style: normal; font-family: 'DM Mono', monospace; font-size: .9cqw; letter-spacing: .06em;
+    background: var(--brand); padding: .35cqw .9cqw; border-radius: 2cqw; white-space: nowrap; }
+  .dwd-thumbs { display: none; position: absolute; right: 1.6cqw; bottom: 1.8cqw; z-index: 2; gap: .6cqw; }
+  .dwd-thumbs img { width: 4.8cqw; height: 3.4cqw; object-fit: cover; border-radius: .5cqw; border: 1px solid rgba(255,255,255,.35);
+    opacity: .5; transition: opacity .4s, transform .4s, box-shadow .4s, border-color .4s; }
+  .dwd-thumbs img.on { opacity: 1; border-color: #fff; transform: translateY(-.4cqw); box-shadow: 0 0 1.2cqw rgba(143,149,255,.9); }
+
+  /* Phone: our impact */
+  .dwd-phone { position: absolute; left: 64.3%; top: 33%; width: 16%; aspect-ratio: 100 / 205; z-index: 4;
+    background: #f4f5ff; border: .55cqw solid #d6d9f2; border-radius: 2.6cqw; overflow: hidden; display: flex; flex-direction: column;
+    box-shadow: 0 3cqw 6cqw rgba(0,0,0,.55), 0 0 4cqw rgba(27,35,230,.45);
+    animation: heroUp .9s .35s cubic-bezier(.2,.7,.2,1) both, dwdBob 6s 1.3s ease-in-out infinite; }
+  .dwd-ph-head { background: var(--brand); color: #fff; display: flex; gap: .7cqw; align-items: center; padding: 2cqw 1.1cqw 1.1cqw; }
+  .dwd-ph-head img { width: 2.4cqw; height: 2.4cqw; border-radius: 50%; border: 1px solid #fff; }
+  .dwd-ph-head b { font-size: 1.15cqw; line-height: 1.1; display: block; }
+  .dwd-ph-head small { font-size: .8cqw; opacity: .8; }
+  .dwd-ph-body { padding: 1cqw; display: grid; gap: .8cqw; color: #0b1066; }
+  .dwd-kpi { background: #fff; border-radius: .9cqw; padding: .7cqw .9cqw; box-shadow: 0 .3cqw 1cqw rgba(27,35,230,.08); min-width: 0; }
+  .dwd-kpi strong { display: block; font-size: 2.1cqw; line-height: 1.1; color: var(--brand); font-variant-numeric: tabular-nums; }
+  .dwd-kpi small { display: block; font-family: 'DM Mono', monospace; font-size: .72cqw; letter-spacing: .05em; color: #6a6f9e; white-space: nowrap; }
+  .dwd-kpi.big { background: linear-gradient(145deg, var(--brand), var(--brand-ink)); }
+  .dwd-kpi.big strong { color: #fff; font-size: 3cqw; }
+  .dwd-kpi.big small { color: var(--brand-soft); }
+  .dwd-kpi-row { display: grid; grid-template-columns: 1fr 1fr; gap: .7cqw; }
+  .dwd-kpi > em { display: block; font-style: normal; font-size: .85cqw; color: #4b5085; }
+  .dwd-bars { display: flex; align-items: flex-end; gap: .45cqw; height: 4.4cqw; margin-top: .6cqw; }
+  .dwd-bars i { flex: 1; border-radius: .3cqw .3cqw 0 0; background: linear-gradient(#8f95ff, #1b23e6);
+    transform-origin: bottom; animation: dwdGrow 1.1s cubic-bezier(.2,.7,.2,1) both; }
+  .dwd-bars i:last-child { background: linear-gradient(#5b62ff, #1b23e6); box-shadow: 0 0 1cqw rgba(27,35,230,.5); }
+  @keyframes dwdGrow { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  .dwd-sectors { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4cqw; }
+  .dwd-sectors li { font-family: 'DM Mono', monospace; font-size: .72cqw; padding: .3cqw .55cqw; border-radius: 2cqw; background: #e6e8ff; color: var(--brand);
+    animation: heroUp .5s cubic-bezier(.2,.7,.2,1) both; }
+
+  @media (max-width: 900px) {
+    .hero-right { display: flex !important; padding: 0 16px 56px; }
+  }
+  @media (max-width: 560px) {
+    .dwd-node small { display: none; }
+    .dwd-node b { font-size: 2.9cqw; }
+    .dwd-node .ic { width: 8cqw; height: 8cqw; }
+    .dwd-node .ic svg { width: 4.2cqw; height: 4.2cqw; }
+    .dwd-title { font-size: 2cqw; width: 44cqw; margin-left: -22cqw; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-left > *, .dwd-node, .dwd-node .ic, .dwd-laptop, .dwd-phone, .dwd-bars i, .dwd-sectors li, .dwd-slide figcaption,
+    .dwd-lines path, .dwd-lines circle, .dwd-slide img.fg, .dwd-progress i::after { animation: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -1778,7 +1908,8 @@
   <div class="grid-overlay"></div>
 
   <div class="hero-left">
-    <h1>Turning Raw Data<br>Into Real Business Decisions</h1>
+    <span class="badge">Data &amp; AI skills &middot; Accra, Ghana</span>
+    <h1>Turning Raw Data<br>Into <em>Real Business Decisions</em></h1>
     <p class="hero-desc">
       An innovative digital learning platform that bridges Africa's data and AI skills gap by providing practical digital and AI skills training, content and career development opportunities.
     </p>
@@ -1803,37 +1934,45 @@
   </div>
 
   <div class="hero-right">
-    <div class="dashboard">
-      <div class="dash-win">
-        <div class="dash-bar">
-          <div class="dot dot-r"></div>
-          <div class="dot dot-y"></div>
-          <div class="dot dot-g"></div>
+    <div class="dwd-scene" role="img" aria-label="Skills Data With Dee learners gain: Excel, SQL, Python, Power BI, data storytelling and AI for analysts, around a gallery of real training sessions and an impact summary.">
+      <div class="dwd-title" aria-hidden="true">Skills our learners gain</div>
+      <svg class="dwd-lines" viewBox="0 0 680 520" aria-hidden="true">
+        <path d="M132 146 C 150 160, 188 162, 206 168" style="animation-delay:-0.00s"/><circle cx="206" cy="168" r="3.5" style="animation-delay:-0.0s"/>
+        <path d="M540 146 C 520 160, 486 162, 470 168" style="animation-delay:-0.27s"/><circle cx="470" cy="168" r="3.5" style="animation-delay:-0.4s"/>
+        <path d="M92 272 C 124 272, 146 270, 170 268" style="animation-delay:-0.54s"/><circle cx="170" cy="268" r="3.5" style="animation-delay:-0.8s"/>
+        <path d="M594 282 C 576 282, 562 286, 548 288" style="animation-delay:-0.81s"/><circle cx="548" cy="288" r="3.5" style="animation-delay:-1.2s"/>
+        <path d="M158 442 C 200 438, 222 404, 238 384" style="animation-delay:-1.08s"/><circle cx="238" cy="384" r="3.5" style="animation-delay:-1.6s"/>
+        <path d="M546 450 C 528 446, 514 434, 505 424" style="animation-delay:-1.35s"/><circle cx="505" cy="424" r="3.5" style="animation-delay:-2.0s"/>
+      </svg>
+      <div class="dwd-node" aria-hidden="true" style="left:16.18%;top:15.77%;animation-delay:0.5s"><span class="ic" style="animation-delay:0s"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M3 15h18M9 4v16"/></svg></span><b>Excel</b><small>Turn messy sheets into clear reports</small></div>
+      <div class="dwd-node" aria-hidden="true" style="left:82.35%;top:15.77%;animation-delay:0.6s"><span class="ic" style="animation-delay:-1s"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span><b>SQL</b><small>Get your own answers from any database</small></div>
+      <div class="dwd-node" aria-hidden="true" style="left:9.12%;top:52.31%;animation-delay:0.7s"><span class="ic" style="animation-delay:-2s"><svg viewBox="0 0 24 24"><path d="M8 8l-4 4 4 4M16 8l4 4-4 4M13.5 5.5l-3 13"/></svg></span><b>Python</b><small>Automate hours of work in minutes</small></div>
+      <div class="dwd-node" aria-hidden="true" style="left:90.88%;top:54.23%;animation-delay:0.8s"><span class="ic" style="animation-delay:-3s"><svg viewBox="0 0 24 24"><path d="M5 20V11M11 20V5M17 20v-6M3 20h18"/></svg></span><b>Power BI</b><small>Build dashboards leaders act on</small></div>
+      <div class="dwd-node" aria-hidden="true" style="left:17.65%;top:84.62%;animation-delay:0.9s"><span class="ic" style="animation-delay:-4s"><svg viewBox="0 0 24 24"><path d="M4 5h16v10H9l-5 4z"/><path d="M8 12V10M12 12V8M16 12V9"/></svg></span><b>Data storytelling</b><small>Present insights that win decisions</small></div>
+      <div class="dwd-node" aria-hidden="true" style="left:83.82%;top:86.54%;animation-delay:1.0s"><span class="ic" style="animation-delay:-2.5s"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M10 10h4v4h-4zM9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span><b>AI for analysts</b><small>Practical AI skills you use every day</small></div>
+      <div class="dwd-laptop" aria-hidden="true">
+        <div class="dwd-screen gal" id="dwdGallery">
+          <figure class="dwd-slide on"><img class="bg" src="/IMAGES/gallery-1.jpg" alt=""><img class="fg" src="/IMAGES/gallery-1.jpg" alt=""><figcaption><small>Training</small>Training cohort</figcaption></figure>
+          <figure class="dwd-slide zoom"><img class="bg" src="/IMAGES/mentor-01.jpg" alt=""><img class="fg" src="/IMAGES/mentor-01.jpg" alt=""><figcaption><small>Mentorship</small>Meet our mentors</figcaption></figure>
+          <figure class="dwd-slide"><img class="bg" src="/IMAGES/gallery-13.jpg" alt=""><img class="fg" src="/IMAGES/gallery-13.jpg" alt=""><figcaption><small>Speaking</small>Absa ReadytoWork panel</figcaption></figure>
+          <div class="dwd-gal-top"><div class="dwd-progress"><i></i><i></i><i></i></div>
+            <div class="dwd-gal-head"><img src="/IMAGES/favicon/android-chrome-192x192.png" alt=""><div><b>Data With Dee</b><small>Our work, in pictures</small></div><em>Accra, Ghana</em></div></div>
+          <div class="dwd-thumbs"><img src="/IMAGES/gallery-1.jpg" alt="" loading="lazy" style="object-position:50% 50%"><img src="/IMAGES/mentor-01.jpg" alt="" loading="lazy" style="object-position:zoom"><img src="/IMAGES/gallery-13.jpg" alt="" loading="lazy" style="object-position:50% 30%"></div>
         </div>
-        <div class="dash-body">
-          <div class="dash-label">The Data Diaries With Dee community</div>
-          <div class="dash-head">Growing every month</div>
-          <div class="dash-sub">Community members, cumulative</div>
-          <div class="bars" role="img" aria-label="Bar chart showing the community growing steadily month on month from February 2025 to June 2026.">
-            <div class="bar" style="height:14%;background:rgba(37,99,235,0.28)" title="Feb 2025"></div>
-            <div class="bar" style="height:21%;background:rgba(37,99,235,0.35)" title="Mar 2025"></div>
-            <div class="bar" style="height:27%;background:rgba(37,99,235,0.41)" title="Apr 2025"></div>
-            <div class="bar" style="height:33%;background:rgba(37,99,235,0.48)" title="May 2025"></div>
-            <div class="bar" style="height:41%;background:rgba(37,99,235,0.54)" title="Jun 2025"></div>
-            <div class="bar" style="height:47%;background:rgba(37,99,235,0.61)" title="Aug 2025"></div>
-            <div class="bar" style="height:54%;background:rgba(37,99,235,0.67)" title="Oct 2025"></div>
-            <div class="bar" style="height:63%;background:rgba(37,99,235,0.74)" title="Dec 2025"></div>
-            <div class="bar" style="height:71%;background:rgba(37,99,235,0.80)" title="Feb 2026"></div>
-            <div class="bar" style="height:80%;background:rgba(37,99,235,0.87)" title="Mar 2026"></div>
-            <div class="bar" style="height:90%;background:rgba(37,99,235,0.93)" title="Apr 2026"></div>
-            <div class="bar" style="height:100%;background:rgba(37,99,235,1.00)" title="Jun 2026"></div>
+        <div class="dwd-base"></div>
+      </div>
+      <div class="dwd-phone" aria-hidden="true">
+        <div class="dwd-ph-head"><img src="/IMAGES/favicon/android-chrome-192x192.png" alt=""><div><b>Our impact</b><small>Data With Dee</small></div></div>
+        <div class="dwd-ph-body">
+          <div class="dwd-kpi big"><strong data-count="50" data-suffix="+">50+</strong><small>PROFESSIONALS TRAINED</small></div>
+          <div class="dwd-kpi-row">
+            <div class="dwd-kpi"><strong data-count="5" data-suffix="+">5+</strong><small>YEARS</small></div>
+            <div class="dwd-kpi"><strong data-count="100" data-suffix="%">100%</strong><small>CUSTOM</small></div>
           </div>
-          <div class="bar-axis"><span>Feb 2025</span><span>Jun 2026</span></div>
-          <div class="chip-row">
-            <div class="chip">Live sessions</div>
-            <div class="chip">Mentorship</div>
-            <div class="chip">Courses</div>
+          <div class="dwd-kpi"><em>Community growth</em>
+            <div class="dwd-bars"><i style="height:14%;animation-delay:.6s"></i><i style="height:27%;animation-delay:.68s"></i><i style="height:41%;animation-delay:.76s"></i><i style="height:54%;animation-delay:.84s"></i><i style="height:71%;animation-delay:.92s"></i><i style="height:90%;animation-delay:1s"></i><i style="height:100%;animation-delay:1.08s"></i></div>
           </div>
+          <ul class="dwd-sectors"><li style="animation-delay:1.2s">Finance</li><li style="animation-delay:1.3s">Healthcare</li><li style="animation-delay:1.4s">NGOs</li><li style="animation-delay:1.5s">Logistics</li><li style="animation-delay:1.6s">FMCG</li></ul>
         </div>
       </div>
     </div>
@@ -2998,6 +3137,35 @@ const revealObs = new IntersectionObserver(entries => {
 }, { threshold: 0.15 });
 revealEls.forEach(el => revealObs.observe(el));
 
+</script>
+<script>
+/* Hero scene: gallery stories on the phone, skills unlocking, counting impact numbers */
+(function(){
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var phone = document.getElementById('dwdGallery');
+  if (phone) {
+    var slides = phone.querySelectorAll('.dwd-slide'), bars = phone.querySelectorAll('.dwd-progress i'), thumbs = phone.querySelectorAll('.dwd-thumbs img'), n = 0;
+    function show(k){
+      for (var j = 0; j < slides.length; j++) {
+        slides[j].classList.toggle('prev', slides[j].classList.contains('on') && j !== k); slides[j].classList.toggle('on', j === k);
+        bars[j].className = j < k ? 'done' : (j === k ? 'now' : ''); thumbs[j].classList.toggle('on', j === k);
+      }
+    }
+    show(0);
+    if (!still) setInterval(function(){ n = (n + 1) % slides.length; show(n); }, 3600);
+  }
+  var nodes = document.querySelectorAll('.dwd-node'), m = 0;
+  if (still) { for (var a = 0; a < nodes.length; a++) nodes[a].classList.add('lit'); }
+  else setTimeout(function tick(){
+    if (m < nodes.length) { nodes[m].classList.add('lit'); m++; setTimeout(tick, 700); }
+    else setTimeout(function(){ for (var b = 0; b < nodes.length; b++) nodes[b].classList.remove('lit'); m = 0; setTimeout(tick, 900); }, 3000);
+  }, 1400);
+  if (!still) document.querySelectorAll('.dwd-phone [data-count]').forEach(function(el){
+    var end = +el.dataset.count, suf = el.dataset.suffix || '', t0 = null;
+    function f(t){ if (!t0) t0 = t; var p = Math.min((t - t0) / 1600, 1); el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))) + suf; if (p < 1) requestAnimationFrame(f); }
+    el.textContent = '0' + suf; setTimeout(function(){ requestAnimationFrame(f); }, 600);
+  });
+})();
 </script>
 </body>
 </html>
