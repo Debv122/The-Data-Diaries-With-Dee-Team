@@ -1,0 +1,11 @@
+{
+  "name": "The Data Diaries With Dee",
+  "short_name": "Data With Dee",
+  "icons": [
+    { "src": "/IMAGES/favicon/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/IMAGES/favicon/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#1b23e6",
+  "background_color": "#1b23e6",
+  "display": "standalone"
+}

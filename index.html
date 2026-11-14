@@ -4,6 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Data Analytics Training in Accra, Ghana | Data With Dee</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="/IMAGES/favicon/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/IMAGES/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/IMAGES/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/IMAGES/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#1b23e6">
 <meta name="description" content="Learn Excel, SQL, Python &amp; Power BI with Data With Dee. Practical data analytics training and dashboard support in Accra, Ghana.">
 <link rel="canonical" href="https://thedatadiarieswithdee.com/">
 <meta name="msvalidate.01" content="AC636E3E0E80460A972C48AD6F8E666A" />
@@ -137,7 +144,6 @@
   }
   .nav-more-btn:hover, .nav-more.open .nav-more-btn { color: #60a5fa; }
   .nav-more-menu {
-    display: none;
     position: absolute;
     top: 100%;
     right: 0;
@@ -154,7 +160,12 @@
   .nav-more-menu::before { content: ''; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
   .nav-more:hover .nav-more-menu,
   .nav-more:focus-within .nav-more-menu,
-  .nav-more.open .nav-more-menu { display: block; }
+  .nav-more.open .nav-more-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
   .nav-more-menu a { display: block; padding: 10px 18px; }
   .nav-cta {
     background: var(--accent) !important;
@@ -165,6 +176,130 @@
     transition: background 0.2s !important;
   }
   .nav-cta:hover { background: var(--sky) !important; color: var(--white) !important; }
+
+  /* ─── NAV ANIMATIONS & INTERACTION ──────────── */
+  /* Nav slides in on load, shrinks + gains a shadow once you scroll,
+     hides when scrolling down and comes back when scrolling up */
+  nav {
+    transition: height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease, transform 0.35s ease;
+    animation: navDrop 0.6s cubic-bezier(.2,.8,.2,1) backwards;
+  }
+  @keyframes navDrop { from { transform: translateY(-100%); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  nav.scrolled { height: 58px; background: rgba(10,22,40,0.99); box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
+  nav.nav-hidden { transform: translateY(-100%); }
+  .nav-brand { transition: transform 0.25s ease; display: inline-block; }
+  .nav-brand:hover { transform: scale(1.04); }
+  .nav-brand em { transition: color 0.25s ease; }
+  .nav-brand:hover em { color: #93c5fd; }
+
+  /* Links fade in one after another on load */
+  .nav-links > li { animation: navItemIn 0.5s ease backwards; }
+  .nav-links > li:nth-child(1) { animation-delay: .15s }
+  .nav-links > li:nth-child(2) { animation-delay: .20s }
+  .nav-links > li:nth-child(3) { animation-delay: .25s }
+  .nav-links > li:nth-child(4) { animation-delay: .30s }
+  .nav-links > li:nth-child(5) { animation-delay: .35s }
+  .nav-links > li:nth-child(6) { animation-delay: .40s }
+  .nav-links > li:nth-child(7) { animation-delay: .45s }
+  @keyframes navItemIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Sliding underline on hover + for the section currently on screen */
+  .nav-links > li > a:not(.nav-cta), .nav-more-btn { position: relative; padding: 6px 0; }
+  .nav-links > li > a:not(.nav-cta)::after, .nav-more-btn::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: #60a5fa;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .nav-links > li > a:not(.nav-cta):hover::after, .nav-more-btn:hover::after,
+  .nav-links a.active::after, .nav-more-btn.active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .nav-links a.active, .nav-more-btn.active { color: #60a5fa; }
+
+  /* "More" caret flips and the menu fades/slides in */
+  .nav-more-btn span { display: inline-block; transition: transform 0.25s ease; }
+  .nav-more:hover .nav-more-btn span, .nav-more.open .nav-more-btn span { transform: rotate(180deg); }
+  .nav-more-menu {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px) scale(0.97);
+    transform-origin: top right;
+    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+  }
+  .nav-more-menu a { transition: color 0.2s, background 0.2s, padding-left 0.2s; }
+  .nav-more-menu a:hover, .nav-more-menu a.active { background: rgba(96,165,250,0.08); padding-left: 24px; }
+
+  /* Book a Call: lifts on hover, a light sweep passes over it, gentle pulse */
+  .nav-cta { position: relative; overflow: hidden; display: inline-block; }
+  .nav-links .nav-cta { animation: navItemIn 0.5s ease .5s backwards, ctaPulse 3s ease-in-out 2s infinite; }
+  .nav-cta::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -75%;
+    width: 50%; height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+  }
+  .nav-cta:hover::before { left: 130%; }
+  .nav-links .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,99,235,0.45); }
+  @keyframes ctaPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.0); }
+    50% { box-shadow: 0 0 0 6px rgba(59,130,246,0.18); }
+  }
+
+  /* Reading-progress bar along the bottom edge of the nav */
+  .nav-progress {
+    position: absolute;
+    left: 0; bottom: -1px;
+    height: 2px; width: 100%;
+    background: linear-gradient(90deg, var(--accent), #60a5fa);
+    transform: scaleX(0);
+    transform-origin: left;
+    pointer-events: none;
+  }
+
+  /* Mobile menu slides down, links cascade in */
+  .mobile-menu {
+    display: flex !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  }
+  .mobile-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+  .mobile-menu a { opacity: 0; transform: translateX(-12px); transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s; }
+  .mobile-menu.open a { opacity: 1; transform: translateX(0); }
+  .mobile-menu.open a:nth-child(1) { transition-delay: .05s } .mobile-menu.open a:nth-child(2) { transition-delay: .09s }
+  .mobile-menu.open a:nth-child(3) { transition-delay: .13s } .mobile-menu.open a:nth-child(4) { transition-delay: .17s }
+  .mobile-menu.open a:nth-child(5) { transition-delay: .21s } .mobile-menu.open a:nth-child(6) { transition-delay: .25s }
+  .mobile-menu.open a:nth-child(7) { transition-delay: .29s } .mobile-menu.open a:nth-child(8) { transition-delay: .33s }
+  .mobile-menu.open a:nth-child(9) { transition-delay: .37s } .mobile-menu.open a:nth-child(10) { transition-delay: .41s }
+  .mobile-menu a.active { color: #60a5fa; }
+  .mobile-menu { transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, top 0.3s ease; }
+  nav.scrolled ~ .mobile-menu { top: 58px; }
+  .hamburger:hover span { background: #fff; }
+
+  /* Keyboard focus is clearly visible */
+  .nav-links a:focus-visible, .nav-more-btn:focus-visible, .hamburger:focus-visible, .nav-brand:focus-visible, .mobile-menu a:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    nav, .nav-links > li, .nav-links .nav-cta { animation: none !important; }
+    nav, .nav-more-menu, .mobile-menu, .mobile-menu a, .nav-cta::before,
+    .nav-links > li > a::after, .nav-more-btn::after { transition: none !important; }
+  }
 
   /* ─── HERO ─────────────────────────────────── */
   .hero {
@@ -1603,10 +1738,9 @@
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#services">Services</a></li>
-    <li><a href="#workshops">Training</a></li>
+    <li><a href="#training">Training</a></li>
     <li><a href="#mentorship">Mentorship</a></li>
     <li><a href="#courses">Courses</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li class="nav-more">
       <button type="button" class="nav-more-btn" aria-haspopup="true" aria-expanded="false">More <span aria-hidden="true">&#9662;</span></button>
       <ul class="nav-more-menu">
@@ -1618,23 +1752,23 @@
     </li>
     <li><a href="#contact" class="nav-cta">Book a Call</a></li>
   </ul>
-  <button class="hamburger" id="hamburger" aria-label="Open menu">
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
     <span></span><span></span><span></span>
   </button>
+  <div class="nav-progress" id="nav-progress" aria-hidden="true"></div>
 </nav>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
   <a href="#about" class="mobile-link">About</a>
   <a href="#services" class="mobile-link">Services</a>
-  <a href="#workshops" class="mobile-link">Training</a>
+  <a href="#training" class="mobile-link">Training</a>
   <a href="#mentorship" class="mobile-link">Mentorship</a>
   <a href="#speaking" class="mobile-link">Speaking</a>
   <a href="#gallery" class="mobile-link">Gallery</a>
   <a href="#courses" class="mobile-link">Courses</a>
   <a href="#outcomes" class="mobile-link">Outcomes</a>
   <a href="faq.html" class="mobile-link">FAQ</a>
-  <a href="#contact" class="mobile-link">Contact</a>
   <a href="#contact" class="nav-cta mobile-link">Book a Call</a>
 </div>
 
@@ -1908,9 +2042,9 @@
 </section>
 
 <!-- FORMAT -->
-<section class="format-section">
+<section class="format-section" id="training">
   <div class="format-inner">
-    <div class="section-kicker">Delivery Options</div>
+    <div class="section-kicker">Training</div>
     <div class="rule" style="background:#60a5fa"></div>
     <h2 style="color:#fff">Training that works for your schedule</h2>
     <p class="section-sub">Flexible formats to fit your team, whether you are in one office or spread across cities.</p>
@@ -2698,15 +2832,65 @@
   const mobileMenu = document.getElementById('mobile-menu');
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('open');
-    mobileMenu.classList.toggle('open');
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
   });
   // Close menu on link click
   mobileMenu.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       hamburger.classList.remove('open');
       mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // Nav on scroll: compact + shadow, hide on scroll down / show on scroll up, progress bar
+  (function () {
+    const nav = document.querySelector('nav');
+    const progress = document.getElementById('nav-progress');
+    let lastY = window.scrollY;
+    let ticking = false;
+    function onScroll() {
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 40);
+      const menuOpen = mobileMenu.classList.contains('open') || (navMore && navMore.classList.contains('open'));
+      if (y > lastY && y > 300 && !menuOpen) nav.classList.add('nav-hidden');
+      else if (y < lastY - 4 || y <= 300) nav.classList.remove('nav-hidden');
+      lastY = y;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = 'scaleX(' + (max > 0 ? y / max : 0) + ')';
+      ticking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+    }, { passive: true });
+    // Show the nav again if someone tabs into it while it is hidden
+    nav.addEventListener('focusin', () => nav.classList.remove('nav-hidden'));
+    onScroll();
+  })();
+
+  // Highlight the nav link for the section currently on screen
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    const links = document.querySelectorAll('.nav-links a[href^="#"]:not(.nav-cta), .mobile-menu a[href^="#"]:not(.nav-cta)');
+    const moreBtn = document.querySelector('.nav-more-btn');
+    const ids = [...new Set([...links].map(a => a.getAttribute('href').slice(1)))];
+    const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        let inMore = false;
+        links.forEach(a => {
+          const match = a.getAttribute('href') === '#' + id;
+          a.classList.toggle('active', match);
+          if (match && a.closest('.nav-more-menu')) inMore = true;
+        });
+        if (moreBtn) moreBtn.classList.toggle('active', inMore);
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    sections.forEach(s => spy.observe(s));
+  })();
 
   // Checkbox pill interaction
   document.querySelectorAll('.cb-pill').forEach(pill => {
